@@ -20,6 +20,26 @@ app.post("/book", (req, res) => {
 	res.send("Book is added to the database");
 });
 
+app.get("/book", (req, res) => {
+	res.json(books);
+});
+
+app.get("/book/:isbn", (req, res) => {
+	// reading isbn from the URL
+	const isbn = req.params.isbn;
+
+	// searching books for the isbn
+	for (let book of books) {
+		if (book.isbn === isbn) {
+			res.json(book);
+			return;
+		}
+	}
+
+	// sending 404 when not found something is a good practice
+	res.status(404).send("Book not found");
+});
+
 app.delete("/book/:isbn", (req, res) => {
 	// reading isbn from the URL
 	const isbn = req.params.isbn;
