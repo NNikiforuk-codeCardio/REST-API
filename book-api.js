@@ -15,14 +15,9 @@ app.use(bodyParser.json());
 app.post("/book", (req, res) => {
 	const book = req.body;
 
-	// output the book to the console for debugging
 	books.push(book);
 
 	res.send("Book is added to the database");
-});
-
-app.get("/book", (req, res) => {
-	res.json(books);
 });
 
 app.get("/book/:isbn", (req, res) => {
